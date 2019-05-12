@@ -1,8 +1,7 @@
-import rasterio
-from rasterio import plot
-import matplotlib
-from matplotlib import pyplot
 import numpy
+import rasterio
+
+print('all modules imported')
 
 # path to the sentinel rasters
 raster_base_path = "/Users/hk/Downloads/Sentinel2_Kurs2/Uebungen/JaehrlicheVeraenderungen/sentinel2/S2A_MSIL1C_20180704T103021_N0206_R108_T32TLT_20180704T174024.SAFE/GRANULE/L1C_T32TLT_A015835_20180704T103023/IMG_DATA/"
@@ -10,7 +9,7 @@ raster_base_path = "/Users/hk/Downloads/Sentinel2_Kurs2/Uebungen/JaehrlicheVerae
 # output path
 output_base_path = "/Users/hk/Downloads/gaga/"
 
-# assign the necessary bands to some rasters to variables
+# initialize the necessary rasters for the ndvi calculation.
 band4 = rasterio.open(raster_base_path + "T32TLT_20180704T103021_B04.jp2", driver="JP2OpenJPEG")  # red
 band8 = rasterio.open(raster_base_path + "T32TLT_20180704T103021_B08.jp2", driver="JP2OpenJPEG")  # nir
 
@@ -31,14 +30,14 @@ nir = band8.read(1).astype('float64')
 print("create ndvi image...")
 # this is will give us an array of values, not an actual raster image.
 ndvi_array = numpy.where(
-    # if nir + red equals 0, we want the ndvi to be 0.
+    # if nir + red equals 0, we want the ndvi to be 0,
     # otherwise there is an error because of division by 0
     (nir + red) == 0., 0,
     # if the value is > 0, we calculate the ndvi
     (nir - red) / (nir + red)
 )
 
-# set negative ndvi values to 0
+# set negative ndvi values to 0, we only want values between 0 and 1.
 ndvi_array = numpy.where(ndvi_array < 0, 0, ndvi_array)
 
 # create a new (empty) raster
