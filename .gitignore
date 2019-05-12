@@ -24,9 +24,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
 .idea/
-venv/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
