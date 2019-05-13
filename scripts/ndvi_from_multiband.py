@@ -17,8 +17,6 @@ print(multiband.width)  # row count
 print(multiband.height)  # column count
 print(multiband.dtypes)  # data type of the raster ('uint16',)
 print(multiband.crs)  # projection of the raster
-# print(multiband.read(1)) # read first band of the raster as an array.
-# plot.show(band4)
 
 # because the output of the ndvi is a floating point number,
 # we have to convert the input rasters to floating point as well.

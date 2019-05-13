@@ -7,7 +7,7 @@ raster_base_path = "/Users/hk/Downloads/Sentinel2_Kurs2/Uebungen/JaehrlicheVerae
 # output path
 output_base_path = "/Users/hk/Downloads/gaga/"
 
-# initialize the rasters to have in the multiband result.
+# initialize the rasters we want to have in the multiband result.
 band2 = rasterio.open(raster_base_path + "T32TLT_20180704T103021_B02.jp2", driver="JP2OpenJPEG")  # blue
 band3 = rasterio.open(raster_base_path + "T32TLT_20180704T103021_B03.jp2", driver="JP2OpenJPEG")  # green
 band4 = rasterio.open(raster_base_path + "T32TLT_20180704T103021_B04.jp2", driver="JP2OpenJPEG")  # red

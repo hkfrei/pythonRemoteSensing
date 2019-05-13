@@ -1,6 +1,5 @@
 import numpy
 import rasterio
-
 print('all modules imported')
 
 # path to the sentinel rasters
@@ -19,8 +18,6 @@ print(band4.width)  # row count
 print(band4.height)  # column count
 print(band4.dtypes)  # data type of the raster ('uint16',)
 print(band4.crs)  # projection of the raster
-# print(band4.read(1)) # read first band of the raster as an array.
-# plot.show(band4)
 
 # because the output of the ndvi is a floating point number,
 # we have to convert the input rasters to floating point as well.
@@ -28,7 +25,7 @@ red = band4.read(1).astype('float64')
 nir = band8.read(1).astype('float64')
 
 print("create ndvi image...")
-# this is will give us an array of values, not an actual raster image.
+# this is will give us an array of values, not a real raster image.
 ndvi_array = numpy.where(
     # if nir + red equals 0, we want the ndvi to be 0,
     # otherwise there is an error because of division by 0
@@ -41,12 +38,11 @@ ndvi_array = numpy.where(
 ndvi_array = numpy.where(ndvi_array < 0, 0, ndvi_array)
 
 # create a new (empty) raster
-ndvi_image = rasterio.open(output_base_path + "ndvi_17.tiff", "w", driver="Gtiff", width=band4.width,
+ndvi_image = rasterio.open(output_base_path + "ndvi_17.tif", "w", driver="Gtiff", width=band4.width,
                            height=band4.height, count=1, crs=band4.crs, transform=band4.transform, dtype='float64')
 
 # write the array to the raster band 1
 ndvi_image.write(ndvi_array, 1)
-
 ndvi_image.close()
 
 print("finished")

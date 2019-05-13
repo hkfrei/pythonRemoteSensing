@@ -1,10 +1,9 @@
 import numpy
 import rasterio
 import gdal
-
 print('all modules imported')
 
-# path to the ndvi rasters
+# path to the folder with the ndvi rasters
 base_path = "/Users/hk/Downloads/gaga/"
 
 # shapefile with forest mask
@@ -31,7 +30,7 @@ ndvi_diff_reclass_array = numpy.where(
     ndvi_diff_array <= -0.05, 1, 9999.0
 )
 
-# create a new (empty) raster for the original diff
+# create a new (empty) raster for the "original" diff
 ndvi_diff_image = rasterio.open(base_path + "ndvi_diff.tif", "w", driver="Gtiff", width=ndvi_2018.width,
                                 height=ndvi_2018.height, count=1, crs=ndvi_2018.crs, transform=ndvi_2018.transform,
                                 dtype='float64')
