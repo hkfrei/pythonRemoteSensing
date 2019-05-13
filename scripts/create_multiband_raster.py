@@ -1,7 +1,4 @@
 import rasterio
-import matplotlib
-from matplotlib import pyplot
-from rasterio import plot
 print('all modules imported')
 
 # path to the sentinel rasters
@@ -22,7 +19,6 @@ print(band4.width)  # row count
 print(band4.height) # column count
 print(band4.dtypes) # data type of the raster
 print(band4.crs)    # projection of the raster
-# plot.show(band4)
 
 print("create multiband image...")
 # create a new (empty) raster
